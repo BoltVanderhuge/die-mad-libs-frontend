@@ -1,33 +1,40 @@
 madLibURL = 'http://localhost:3000/mad_libs'
 textEntryURL = 'http://localhost:3000/text_entries/'
 
-renderMadLibs().then(renderAMadlib)
+// renderMadLibs().then(renderAMadlib)
 const storyContainer = document.querySelector('#mad-libs-story')
 const inputForm = document.querySelector('#input-form')
-const inputForm2 = document.querySelector('#input-form2')
 const saveForm = document.querySelector('#save-your-mad-lib')
+const card = document.querySelector('.card')
 
 // ********** Event Listeners **********
 inputForm.addEventListener('submit', updateStory)
-inputForm2.addEventListener('submit', updateStory)
-
+card.addEventListener('click', fetchAMadlib)
 saveForm.addEventListener('submit', saveStory)
 
 // ********** Functions **********
 function renderMadLibs() {
     return fetch(madLibURL)
     .then(response => response.json())
-
 }
 
-function renderAMadlib(madLibs){
-    madLibs.forEach(madLib => {
+function fetchAMadlib(e) {
+    card.className = "card hide"
+    const hTMLID = e.target.dataset.id
+    return fetch(madLibURL + `/${hTMLID}`)
+    .then(response => response.json())
+    .then(renderAMadlib)
+} 
+
+function renderAMadlib(madLib){
+    console.log(madLib)
         let div = document.createElement("div")
         div.className = "current-story"
         div.dataset.id = madLib.id
         div.innerHTML = madLib.story
         storyContainer.append(div)
-    });
+    const mad_lib_id = parseInt(document.querySelector('.current-story').dataset.id)
+    inputForm.innerHTML += madLib.form
 }
 
 function updateStory(e){
@@ -46,7 +53,7 @@ function updateStory(e){
     input4.innerHTML = target4
     inputForm.reset()
     storyContainer.className = "not-hidden"
-    inputForm.className = "hidden"
+    inputForm.className = "hide"
     saveForm.className = "not-hidden"
 }
 
@@ -75,11 +82,12 @@ function saveStory(e) {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(postObj)
 })
-saveForm.className = "hidden"
+saveForm.className = "hide"
 }
 
 const userid = 1
 changeFormIDs(userid)
 function changeFormIDs(userId){
+    console.log(userId);
     inputForm.number.value = userId
 }
