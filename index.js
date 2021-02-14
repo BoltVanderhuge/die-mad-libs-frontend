@@ -4,10 +4,12 @@ textEntryURL = 'http://localhost:3000/text_entries/'
 renderMadLibs().then(renderAMadlib)
 const storyContainer = document.querySelector('#mad-libs-story')
 const inputForm = document.querySelector('#input-form')
+const inputForm2 = document.querySelector('#input-form2')
 const saveForm = document.querySelector('#save-your-mad-lib')
 
 // ********** Event Listeners **********
 inputForm.addEventListener('submit', updateStory)
+inputForm2.addEventListener('submit', updateStory)
 
 saveForm.addEventListener('submit', saveStory)
 
