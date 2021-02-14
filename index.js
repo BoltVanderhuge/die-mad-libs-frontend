@@ -5,11 +5,11 @@ textEntryURL = 'http://localhost:3000/text_entries/'
 const storyContainer = document.querySelector('#mad-libs-story')
 const inputForm = document.querySelector('#input-form')
 const saveForm = document.querySelector('#save-your-mad-lib')
-const card = document.querySelector('.card')
+const cardsContainer = document.querySelector('#cards-container')
 
 // ********** Event Listeners **********
 inputForm.addEventListener('submit', updateStory)
-card.addEventListener('click', fetchAMadlib)
+cardsContainer.addEventListener('click', fetchAMadlib)
 saveForm.addEventListener('submit', saveStory)
 
 // ********** Functions **********
@@ -19,34 +19,41 @@ function renderMadLibs() {
 }
 
 function fetchAMadlib(e) {
-    card.className = "card hide"
+    if (e.target.className === "story-picture"){
+    // cardsContainer.className = "hide"
     const hTMLID = e.target.dataset.id
     return fetch(madLibURL + `/${hTMLID}`)
     .then(response => response.json())
     .then(renderAMadlib)
+    }
 } 
 
 function renderAMadlib(madLib){
-    console.log(madLib)
-        let div = document.createElement("div")
+    storyContainer.className = 'hide'
+    inputForm.innerHTML = ""
+    storyContainer.innerHTML = ""
+    let div = document.createElement("div")
         div.className = "current-story"
         div.dataset.id = madLib.id
         div.innerHTML = madLib.story
         storyContainer.append(div)
     const mad_lib_id = parseInt(document.querySelector('.current-story').dataset.id)
     inputForm.innerHTML += madLib.form
+    inputForm.className = "not-hidden"
+    saveForm.className = "hide"
 }
 
 function updateStory(e){
     e.preventDefault()
+
     const input1 = document.querySelector('#input1')
     const input2 = document.querySelector('#input2')
     const input3 = document.querySelector('#input3')
     const input4 = document.querySelector('#input4')
-    let target1 = e.target[1].value
-    let target2 = e.target[2].value
-    let target3  = e.target[3].value
-    let target4 = e.target[4].value
+    let target1 = e.target[0].value
+    let target2 = e.target[1].value
+    let target3  = e.target[2].value
+    let target4 = e.target[3].value
     input1.innerHTML = target1
     input2.innerHTML = target2
     input3.innerHTML = target3
@@ -76,7 +83,6 @@ function saveStory(e) {
         user_inputs: `${target1},${target2},${target3},${target4}`,
         mad_lib_id, user_id, title
     }
-    console.log(postObj)
     fetch(textEntryURL, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
