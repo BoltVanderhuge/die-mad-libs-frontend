@@ -43,7 +43,9 @@ function updateStory(e){
     input3.innerHTML = target3
     input4.innerHTML = target4
     inputForm.reset()
-
+    storyContainer.className = "not-hidden"
+    inputForm.className = "hidden"
+    saveForm.className = "not-hidden"
 }
 
 function saveStory(e) {
@@ -71,6 +73,7 @@ function saveStory(e) {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(postObj)
 })
+saveForm.className = "hidden"
 }
 
 const userid = 1
