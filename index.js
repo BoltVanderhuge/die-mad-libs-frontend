@@ -9,6 +9,7 @@ const inputForm = document.querySelector('#input-form')
 const saveForm = document.querySelector('#save-your-mad-lib')
 const cardsContainer = document.querySelector('#cards-container')
 const ssUL = document.querySelector('#ssUL')
+const deleteBtn = document.querySelector('#delete-story-btn')
 
 fetchUserTextEntries().then(populateSavedStories)
 
@@ -30,7 +31,6 @@ function populateSavedStories(text_entries){
 }
 
 function showSavedStory(e){
-    console.log(e.target.dataset);
     const madlibID = parseInt(e.target.dataset.id)
     const otherID = e.target.dataset.input
     fetch(userURL + `/${userId}`+`/${otherID}`)
@@ -60,6 +60,8 @@ function showSavedStory(e){
     input3.innerHTML = target3
     input4.innerHTML = target4
     storyContainer.className = "not-hidden"
+    deleteBtn.className = "not-hidden"
+    deleteBtn.dataset.id = otherID
     })
 }
 
@@ -67,8 +69,22 @@ function showSavedStory(e){
 inputForm.addEventListener('submit', updateStory)
 cardsContainer.addEventListener('click', fetchAMadlib)
 saveForm.addEventListener('submit', saveStory)
+deleteBtn.addEventListener('click', deleteSavedStory)
 
 // ********** Functions **********
+function deleteSavedStory(e){
+    const textID = e.target.dataset.id
+    const deleteLI = document.querySelector(`*[data-input='${textID}']`)
+    fetch(textEntryURL + `${textID}`, {
+        method: "DELETE",
+        headers: {"Content-Type": "application/json"},
+    })
+
+    storyContainer.innerHTML = ""
+    deleteBtn.className = "hide"
+    deleteLI.remove()
+    
+}
 
 function fetchUserTextEntries() {
     return fetch(userURL + `/${userId}/text`)
@@ -167,3 +183,17 @@ try {
         async: true
 	});
 } catch (e) {}
+
+$(document).ready(function(){
+    $(".modal").hide();
+    //login modal click
+    $(".btn").click(function(){
+      $(this).hide().next().slideDown();
+    });
+    $(".submit").click(function(e){
+      e.preventDefault();
+      $(this).parent().slideUp();
+      $(".btn").delay(500).fadeIn();
+      $("input").val('');
+    });
+  });

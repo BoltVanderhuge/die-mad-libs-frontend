@@ -11,7 +11,44 @@
 </head>
 
 <body>
-    <div id="cards-container" >
+    <!-- splashscreen -->
+    <div id="splashscreen" class="not-hidden">
+        <div class="container1">
+            <section class="split-pane login">
+              <button class="btn login-btn"> Log in </button>
+              <form class="modal login-modal">
+                <h1>Welcome back!</h1>
+                <h4>User Name</h4>
+                  <input placeholder="User Name">
+                <h4>Password</h4>
+                  <input type="password" placeholder="Password">
+                <button class="submit">Submit</button>
+              </form>
+            </section>
+            
+            <section class=" split-pane signup">
+              <button class="btn signup-btn "> Sign Up </button>
+              <form class="modal signup-modal">
+                <h1>New to the party? Sign up here!</h1>
+                <h4>Email</h4>
+                  <input placeholder="Email Address">
+                <h4>Username</h4>
+                  <input placeholder="User name">
+                <h4>Password</h4>
+                  <input type="password" placeholder="Password">
+                <button class="submit">Submit</button>
+              </form>
+            </section>
+            </section>
+          </div>
+    </div>
+
+
+    <!-- main page -->
+    <div id="main-page" class="hide">
+    <!-- story cards -->
+    <div class="parent">
+    <div id="cards-container" class="card-div">
         <div class="card not-hidden" data-id="1">
             <img class = "story-picture" data-id="1" src="https://i2.wp.com/www.ifitshipitshere.com/wp-content/uploads/2010/08/Screen-Shot-2016-08-17-at-12.46.45-PM.png?resize=800%2C672&ssl=1" alt="Avatar" style="width:100%">
         <div class="container">
@@ -36,25 +73,32 @@
             <p>Story abt Fun Times</p>
             </div>
         </div>
-        
     </div>
 
-    <div class="hide" id="mad-libs-story"> </div>
+<!-- mad libs story populates here -->
+    <div class="main">
+        <div class="hide" id="mad-libs-story"> </div>
+        <div class="button-div">
+            <button class="hide" id="delete-story-btn" type="button" data-id="Add id here">Die, die, die my darling</button>
+        </div>
+<!-- user imput form is here -->
+        <form class="not-hidden" id='input-form' > 
+            <input type="hidden" value="User id" id="number"/> 
+        </form>
+    
+<!-- form to save your mad lib story is here -->
+        <form class ="hide" id="save-your-mad-lib">
+            <input type="text" placeholder="Title Your Mad Lib" id="name"/>
+            <input type="submit" value="Save the Mad Lib"/>
+        </form>
+    </div>
 
-    <form class="not-hidden" id='input-form' > 
-        <input type="hidden" value="User id" id="number"/> 
-    </form>
-
-      <form class ="hide" id="save-your-mad-lib">
-        <input type="text" placeholder="Title Your Mad Lib" id="name"/>
-        <input type="submit" value="Save the Mad Lib"/>
-    </form>
-
-
+<!-- saved stories nav -->
+    <div class="nav-div">
     <h1 class="pressed">Saved Stories</h1>
-<ul class="" id="ssUL">
-</ul>
-
+        <ul class="" id="ssUL"></ul>
+    </div>
+</div>
+</div>
 </body>
-
 </html> 
