@@ -19,3 +19,76 @@
 .container {
     padding: 2px 16px;
 }
+
+p {
+	font-size: 2rem;
+	font-weight: 400;
+	text-align: center;
+	margin: 2vmin;
+}
+
+ul {
+	font-size: 3rem;
+	line-height: 1.5;
+	margin: 2vmin 20vmin;
+	list-style: none;
+}
+
+li {
+	position: relative;
+	font-weight: 700;
+	transition: .25s ease-in-out;
+}
+
+.pressed li:hover {
+	/*color: hsl(0, 100%, 25%);*/
+	text-shadow: 1px 1px 0px hsl(0, 0%, 5%), -1px -1px 0px hsl(0, 0%, 15%);
+}
+
+li:hover {
+	color: hsl(200, 100%, 30%);
+}
+
+li::before {
+	content: "";
+	position: absolute;
+	z-index: 1;
+	left: -.75em;
+	top: 46%;
+	width: .3em;
+	height: .3em;
+	box-sizing: border-box;
+	border-radius: 100%;
+	border: .1em solid hsl(0, 0%, 20%);
+	background-color: hsl(200, 100%, 50%);
+	transition: .125s ease-in-out;
+	box-shadow: 0 0 .1rem .1rem hsla(0, 0%, 50%, .25);
+	animation: pulse 1s 1s infinite linear alternate;
+}
+
+@keyframes pulse {
+	from {
+		background-color: hsl(200, 100%, 50%);
+	}
+	to {
+		background-color: hsl(200, 0%, 20%);
+	}
+}
+
+li:hover::before {
+	border-width: 0;
+	background-color: hsl(0, 100%, 50%);
+	box-shadow: 0 0 .5rem .1rem hsla(0, 100%, 50%, 1);
+	animation: none;
+}
+
+h1 {
+	font-size: 3rem;
+	font-weight: 400;
+	margin: 2vmin 20vmin;
+}
+
+.pressed {
+	color: hsl(0, 0%, 10%);
+	text-shadow: -1px -1px 0px hsl(0, 0%, 5%), 1px 1px 0px hsl(0, 0%, 15%);
+}
