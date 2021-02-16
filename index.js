@@ -10,8 +10,19 @@ const saveForm = document.querySelector('#save-your-mad-lib')
 const cardsContainer = document.querySelector('#cards-container')
 const ssUL = document.querySelector('#ssUL')
 const deleteBtn = document.querySelector('#delete-story-btn')
+const login = document.querySelector(".login")
 
 fetchUserTextEntries().then(populateSavedStories)
+
+
+// ********** Event Listeners **********
+inputForm.addEventListener('submit', updateStory)
+cardsContainer.addEventListener('click', fetchAMadlib)
+saveForm.addEventListener('submit', saveStory)
+deleteBtn.addEventListener('click', deleteSavedStory)
+// login.addEventListener('click', loginPrompt)
+
+// ********** Functions **********
 
 changeFormIDs(userId)
 function changeFormIDs(userId){
@@ -65,13 +76,12 @@ function showSavedStory(e){
     })
 }
 
-// ********** Event Listeners **********
-inputForm.addEventListener('submit', updateStory)
-cardsContainer.addEventListener('click', fetchAMadlib)
-saveForm.addEventListener('submit', saveStory)
-deleteBtn.addEventListener('click', deleteSavedStory)
 
-// ********** Functions **********
+
+// function loginPrompt(e){
+//     console.log(e)
+// }
+
 function deleteSavedStory(e){
     const textID = e.target.dataset.id
     const deleteLI = document.querySelector(`*[data-input='${textID}']`)
@@ -184,16 +194,54 @@ try {
 	});
 } catch (e) {}
 
-$(document).ready(function(){
-    $(".modal").hide();
-    //login modal click
-    $(".btn").click(function(){
-      $(this).hide().next().slideDown();
-    });
-    $(".submit").click(function(e){
-      e.preventDefault();
-      $(this).parent().slideUp();
-      $(".btn").delay(500).fadeIn();
-      $("input").val('');
-    });
-  });
+
+// Splashscreen Animation
+"use strict";
+
+const grid = document.querySelector('.m-grid');
+const tl = new TimelineMax();
+TweenLite.set(grid, {
+    transformPerspective: 400,
+    transformOrigin: '50% 50%'
+});
+const anim2Props = {
+    rotationX: 75,
+    y: '0%',
+    ease: Power2.easeIn,
+    transformPerspective: 300,
+    onComplete: () => grid.classList.add('is-animating')
+};
+tl.to(grid, 1, {
+    scaleY: 1.5,
+    ease: Power3.easeIn
+    }).to(grid, 1, anim2Props, '+=0.3').to('.m-logo__wrap', 1, {
+    scale: 1
+});
+
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+login.onclick = function() {
+  modal.style.display = "block";
+  console.log("clicked")
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}

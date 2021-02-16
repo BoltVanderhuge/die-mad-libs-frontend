@@ -7,40 +7,43 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="index.js" defer></script>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="/dist/css/styles.min.css">
+    <link rel="stylesheet" type="text/css" href="/dist/css/styles.min.css.map">
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TimelineMax.min.js"></script>
+    <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeConsoleRunner-7f4d47902dc785f30dedcac9c996b9f31d4dfcc33567cc48f0431bc918c2bf05.js"></script>
 </head>
 
 <body>
     <!-- splashscreen -->
-    <div id="splashscreen" class="not-hidden">
-        <div class="container1">
-            <section class="split-pane login">
-              <button class="btn login-btn"> Log in </button>
-              <form class="modal login-modal">
-                <h1>Welcome back!</h1>
-                <h4>User Name</h4>
-                  <input placeholder="User Name">
-                <h4>Password</h4>
-                  <input type="password" placeholder="Password">
-                <button class="submit">Submit</button>
-              </form>
-            </section>
-            
-            <section class=" split-pane signup">
-              <button class="btn signup-btn "> Sign Up </button>
-              <form class="modal signup-modal">
-                <h1>New to the party? Sign up here!</h1>
-                <h4>Email</h4>
-                  <input placeholder="Email Address">
-                <h4>Username</h4>
-                  <input placeholder="User name">
-                <h4>Password</h4>
-                  <input type="password" placeholder="Password">
-                <button class="submit">Submit</button>
-              </form>
-            </section>
-            </section>
-          </div>
+    <div id="splashscreen" class="show">
+        <div class="wrapper">
+            <div class="m-grid"></div>
+            <div class="m-logo">
+                <div class="m-logo__wrap">
+                    <h1>Die<br/>MadLibs</h1>
+                    <div class="subtitle">A Game From the Distant Past<br>Styled Like the Future<br>As Thought By the Recent Past</div>
+                    <br>
+                    <div class="login">Shall We Play a Game?</div>
+                </div>
+            </div>
+        </div>      
+    </div>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+    
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <form class="login">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username"><br>
+            <input type="submit" name="Log In" value="Login" />
+            <input type="submit" name="Sign Up" value="Signup" />
+          </form>
+      </div>
+    
     </div>
 
 
@@ -98,7 +101,10 @@
     <h1 class="pressed">Saved Stories</h1>
         <ul class="" id="ssUL"></ul>
     </div>
-</div>
+
+
+
+</div>\
 </div>
 </body>
 </html> 

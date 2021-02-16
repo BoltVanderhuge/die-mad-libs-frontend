@@ -1,0 +1,319 @@
+.hide {
+    opacity: 0;
+    display: none;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Monoton");
+@import url("https://fonts.googleapis.com/css?family=Press+Start+2P");
+@import url("https://fonts.googleapis.com/css?family=Mr+Dafoe");
+@import url("https://fonts.googleapis.com/css?family=Changa+One");
+
+#splashscreen {
+  background: #000;
+  background-image: linear-gradient(to bottom, #6a0275 10%, #040c4a 60%);
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.m-logo {
+  & {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 501;
+  }
+
+  &__wrap {
+    transform: scale(0);
+    text-align: center;
+  }
+
+  h1 {
+    font-family: "Press start 2p", sans-serif;
+    font-size: 62px;
+    letter-spacing: -4px;
+    font-weight: 400;
+    margin: 0 0 0.25em;
+    line-height: 1.25;
+    background-image: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      color-stop(0%, #3ff8c6),
+      color-stop(0%, #3fa8c6),
+      color-stop(100%, #399ab2)
+    );
+    background-image: -webkit-linear-gradient(
+      top,
+      #3fa8c6 0%,
+      #3fa8c6 0%,
+      #ff9ab2 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    // background-clip: text;
+    // text-shadow: 0 px 1px #000;
+  }
+
+  .subtitle {
+    color: #ec008c;
+    font-size: 50px;
+    margin: 0;
+    font-family: "Mr Dafoe", serif;
+    text-shadow: 0px 1x 0px darken(#ec008c, 30%);
+  }
+
+  .login {
+    font-family: "Changa One", sans-serif;
+    font-size: 47px;
+    word-spacing: 3px;
+    color: #3fa8c6;
+    margin: 3;
+    text-shadow: 0px 1x 0px darken(#3fa8c6, 30%);
+    cursor: pointer;
+  }
+}
+
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  min-height: 400px;
+  overflow: hidden;
+  filter: blur(1px);
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    // background-color: gray;
+    background-image: linear-gradient(transparent 70%, rgba(#000, 0.5) 30%);
+    background-size: 3px 3px;
+    z-index: 601;
+    pointer-events: none;
+  }
+}
+.m-grid {
+  & {
+    // background-color: black;
+    position: absolute;
+    top: 50%;
+    margin-top: -75vh;
+    left: 50%;
+    margin-left: -100vw;
+    width: 200vw;
+    height: 150vh;
+    transform: scaleY(0);
+    background-image: linear-gradient(
+        0deg,
+        transparent 24%,
+        rgba(#ec008c, 0.5) 25%,
+        rgba(#ec008c, 0.9) 26%,
+        transparent 27%,
+        transparent 74%,
+        rgba(#ec008c, 0.5) 75%,
+        rgba(#ec008c, 0.9) 76%,
+        transparent 77%,
+        transparent
+      ),
+      linear-gradient(
+        90deg,
+        transparent 24%,
+        rgba(#ec008c, 0.75) 25%,
+        rgba(#ec008c, 0.25) 26%,
+        transparent 27%,
+        transparent 74%,
+        rgba(#ec008c, 0.75) 75%,
+        rgba(#ec008c, 0.25) 76%,
+        transparent 77%,
+        transparent
+      );
+    background-size: 50px 50px;
+
+    &.is-animating {
+      animation: fly 1s linear;
+      animation-iteration-count: infinite;
+    }
+  }
+}
+
+@keyframes fly {
+  0% {
+    transform: perspective(300px) rotateX(80deg) translateY(0%);
+  }
+  100% {
+    transform: perspective(300px) rotateX(80deg) translateY(50px);
+  }
+}
+
+
+/* .parent {
+	display: grid;
+	grid-template-columns: 200px 1fr;
+	grid-template-rows: 200px 1fr;
+	height: 100%;
+} */
+
+/* .title-div { grid-area: 1 / 1 / 2 / 2; }
+.nav-div { grid-area: 2 / 1 / 3 / 2; }
+.card-div { grid-area: 1 / 2 / 2 / 3; }
+.main-div { grid-area: 2 / 2 / 3 / 3; } */
+/* 
+.title-div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #ff70a6;
+}
+
+.nav-div {
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+	height: 100%;
+}
+
+.card-div {
+	display: flex;
+	overflow-x: auto;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	padding-left: 10px;
+	scroll-behavior: smooth;
+} */
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 30%;
+}
+
+.card.hide {
+    opacity: 0;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+    padding: 2px 16px;
+}
+
+ p {
+ 	font-size: 2rem;
+	font-weight: 400;
+	text-align: center;
+	margin: 2vmin;
+}
+
+ul {
+	font-size: 3rem;
+	line-height: 1.5;
+	margin: 2vmin 20vmin;
+	list-style: none;
+}
+
+li {
+	position: relative;
+	font-weight: 700;
+	transition: .25s ease-in-out;
+}
+
+.pressed li:hover {
+	/*color: hsl(0, 100%, 25%);*/
+	text-shadow: 1px 1px 0px hsl(0, 0%, 5%), -1px -1px 0px hsl(0, 0%, 15%);
+}
+
+li:hover {
+	color: hsl(200, 100%, 30%);
+}
+
+li::before {
+	content: "";
+	position: absolute;
+	z-index: 1;
+	left: -.75em;
+	top: 46%;
+	width: .3em;
+	height: .3em;
+	box-sizing: border-box;
+	border-radius: 100%;
+	border: .1em solid hsl(0, 0%, 20%);
+	background-color: hsl(200, 100%, 50%);
+	transition: .125s ease-in-out;
+	box-shadow: 0 0 .1rem .1rem hsla(0, 0%, 50%, .25);
+	animation: pulse 1s 1s infinite linear alternate;
+}
+
+@keyframes pulse {
+	from {
+		background-color: hsl(200, 100%, 50%);
+	}
+	to {
+		background-color: hsl(200, 0%, 20%);
+	}
+}
+
+li:hover::before {
+	border-width: 0;
+	background-color: hsl(0, 100%, 50%);
+	box-shadow: 0 0 .5rem .1rem hsla(0, 100%, 50%, 1);
+	animation: none;
+}
+/* 
+h1 {
+	font-size: 3rem;
+	font-weight: 400;
+	margin: 2vmin 20vmin;
+} */
+
+.pressed {
+	color: hsl(0, 0%, 10%);
+	text-shadow: -1px -1px 0px hsl(0, 0%, 5%), 1px 1px 0px hsl(0, 0%, 15%);
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
