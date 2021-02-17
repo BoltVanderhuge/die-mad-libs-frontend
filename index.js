@@ -113,8 +113,10 @@ function loginPrompt(e){
 
     if (buttonValue === "Signup"){
         createAUser(userObj)
+        audioObj.play()
     } else if (buttonValue === "Login"){
         fetchAUser(userObj)
+        
     }  
 }
 
@@ -316,3 +318,4 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
