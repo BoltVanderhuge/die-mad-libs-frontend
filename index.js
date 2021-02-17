@@ -3,30 +3,55 @@ textEntryURL = 'http://localhost:3000/text_entries/'
 userURL = 'http://localhost:3000/users'
 
 // renderMadLibs().then(renderAMadlib)
-let userId = 1
+let userId 
 const storyContainer = document.querySelector('#mad-libs-story')
 const inputForm = document.querySelector('#input-form')
 const saveForm = document.querySelector('#save-your-mad-lib')
 const cardsContainer = document.querySelector('#cards-container')
 const ssUL = document.querySelector('#ssUL')
 const deleteBtn = document.querySelector('#delete-story-btn')
-const login = document.querySelector(".login")
-
-fetchUserTextEntries().then(populateSavedStories)
-
+const loginModal = document.querySelector(".login")
+const loginForm = document.querySelector(".login-form")
+const splashScreen = document.querySelector("#splashscreen")
+const mainScreen = document.querySelector("#main-page")
+const deleteUserBtn = document.querySelector(".delete")
+const logoutBtn = document.querySelector(".logout")
 
 // ********** Event Listeners **********
 inputForm.addEventListener('submit', updateStory)
 cardsContainer.addEventListener('click', fetchAMadlib)
 saveForm.addEventListener('submit', saveStory)
 deleteBtn.addEventListener('click', deleteSavedStory)
-// login.addEventListener('click', loginPrompt)
+loginForm.addEventListener('submit', loginPrompt)
+deleteUserBtn.addEventListener('click', deleteUser)
+logoutBtn.addEventListener('click', logoutUser)
 
 // ********** Functions **********
 
-changeFormIDs(userId)
-function changeFormIDs(userId){
+function deleteUser(e){
+    fetch(userURL + `/${e.target.dataset.id}`, {
+        method: "DELETE"
+    })
+
+    splashScreen.className = "show"
+    mainScreen.className = "hide"
+    changeFormIDs(1)
+}
+
+function logoutUser(e){
+    splashScreen.className = "show"
+    mainScreen.className = "hide"
+    changeFormIDs(1)
+}
+
+
+function changeFormIDs(Id){
+    userId = Id
     inputForm.number.value = userId
+    deleteUserBtn.dataset.id = userId
+    logoutBtn.dataset.id = userId
+
+    fetchUserTextEntries().then(populateSavedStories)
 }
 
 function populateSavedStories(text_entries){
@@ -78,9 +103,56 @@ function showSavedStory(e){
 
 
 
-// function loginPrompt(e){
-//     console.log(e)
-// }
+function loginPrompt(e){
+    e.preventDefault()
+
+    const name = e.target[0].value 
+    const age = parseInt(e.target[1].value)
+    buttonValue = e.submitter.value
+    userObj = {name, age}
+
+    if (buttonValue === "Signup"){
+        createAUser(userObj)
+    } else if (buttonValue === "Login"){
+        fetchAUser(userObj)
+    }  
+}
+
+function createAUser(userObj){
+    fetch(userURL, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(userObj)
+    })
+    .then(response => response.json())
+    .then(decodeResponse)
+}
+
+function decodeResponse(res){
+    if (!!res.message){
+        alert(`${res.message}`);
+    } else if (!!res[0]){
+        changeFormIDs(res[0].id)
+        splashScreen.className = "hide"
+        mainScreen.className = "show"
+    } else if (!!res.id){
+        changeFormIDs(res.id)
+        splashScreen.className = "hide"
+        mainScreen.className = "show"
+    } else 
+        alert("Username or age is incorrect")
+    
+}
+
+function fetchAUser(userObj){
+    return fetch(userURL + `/${userObj.name}`+ `/${userObj.age}/user`)
+    .then(response => response.json())
+    .then(decodeResponse)
+    // .then(response => console.log(response))
+}
+
+
+
 
 function deleteSavedStory(e){
     const textID = e.target.dataset.id
@@ -229,9 +301,8 @@ var btn = document.getElementById("myBtn");
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
-login.onclick = function() {
+loginModal.onclick = function() {
   modal.style.display = "block";
-  console.log("clicked")
 }
 
 // When the user clicks on <span> (x), close the modal

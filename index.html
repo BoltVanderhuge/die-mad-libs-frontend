@@ -36,9 +36,11 @@
       <!-- Modal content -->
       <div class="modal-content">
         <span class="close">&times;</span>
-        <form class="login">
-            <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username"><br>
+        <form class="login-form">
+            <label for="username">Username:</label>
+            <input required type="text" id="username" name="username">
+            <label for="age">Age:</label>
+            <input required type="number" id="age" name="age">
             <input type="submit" name="Log In" value="Login" />
             <input type="submit" name="Sign Up" value="Signup" />
           </form>
@@ -84,7 +86,7 @@
         <div class="button-div">
             <button class="hide" id="delete-story-btn" type="button" data-id="Add id here">Die, die, die my darling</button>
         </div>
-<!-- user imput form is here -->
+<!-- user input form is here -->
         <form class="not-hidden" id='input-form' > 
             <input type="hidden" value="User id" id="number"/> 
         </form>
@@ -101,8 +103,8 @@
     <h1 class="pressed">Saved Stories</h1>
         <ul class="" id="ssUL"></ul>
     </div>
-
-
+    <input data-id="userID"  class="delete" type="image" src="/assets/delete user.jpg" name="logout" width="145" height="200" alt="logout"/>  
+    <input data-id="userID"  class="logout" type="image" src="/assets/logout.jpg" name="delete" width="195" height="200" alt="delete"/>  
 
 </div>\
 </div>

@@ -1,7 +1,22 @@
 .hide {
-    opacity: 0;
-    display: none;
+  opacity: 0;
+  display: none;
 }
+
+#main-page {
+  background-image: url(https://media.giphy.com/media/iI4vhciiVh2b3j9sgo/giphy.gif);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.current-story{
+  background-color: whitesmoke;
+}
+
+#input-form{
+  background-color: whitesmoke;
+}
+
 
 @import url("https://fonts.googleapis.com/css?family=Monoton");
 @import url("https://fonts.googleapis.com/css?family=Press+Start+2P");
