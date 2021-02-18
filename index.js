@@ -20,7 +20,9 @@ const osUL = document.querySelector(".other-user-stories-list")
 const osOL = document.querySelector(".top-five-list")
 const osContainer = document.querySelector("other-user-story-container")
 
-// ********** Event Listeners **********
+
+//--------------------EVENT LISTENERS--------------------//
+
 inputForm.addEventListener('submit', updateStory)
 cardsContainer.addEventListener('click', fetchAMadlib)
 saveForm.addEventListener('submit', saveStory)
@@ -29,7 +31,7 @@ loginForm.addEventListener('submit', loginPrompt)
 deleteUserBtn.addEventListener('click', deleteUser)
 logoutBtn.addEventListener('click', logoutUser)
 
-// ********** Functions **********
+//--------------------FUNCTIONS--------------------//
 
 
 function fetchOtherTextEntries(){
@@ -124,6 +126,7 @@ function increaseLike(e){
 }
 
 
+// User Functionality
 
 function deleteUser(e){
     fetch(userURL + `/${e.target.dataset.id}`, {
