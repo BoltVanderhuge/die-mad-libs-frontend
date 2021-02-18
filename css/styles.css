@@ -69,6 +69,7 @@ body {
   -ms-grid-column-span: 2;
   grid-area: center-container;
   border: 5px solid #52d6f4;
+  border-radius: 10% 0%;
   background-color: #fefefe;
   padding: 50px;
   margin: 20px;
@@ -107,6 +108,7 @@ body {
   -ms-grid-column: 4;
   grid-area: left-container;
   border: 5px solid coral;
+  border-radius: 10px;
   background-color: #fefefe;
   padding: 50px;
   margin: 20px;
