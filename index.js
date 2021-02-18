@@ -61,6 +61,18 @@ function showOthersSavedStory(e){
     let div = document.createElement("div")
     div.className = "current-story"
     div.innerHTML = story
+    let likeDiv = document.createElement("div")
+    div.append(likeDiv)
+    let p = document.createElement("p")
+    p.className = "react-count"
+    p.innerText = `${response.likes} likes`
+    let button = document.createElement("button")
+    button.className = "like-button"
+    button.dataset.id = otherID
+    button.innerText = "♥️ Like"
+    button.addEventListener('click', increaseLike)
+    p.append(button)
+    likeDiv.append(p)
     storyContainer.append(div)
     let num = 0
     let inputs = document.querySelectorAll('#input')
@@ -72,6 +84,23 @@ function showOthersSavedStory(e){
     storyContainer.className = "not-hidden"
  
     })
+}
+
+function increaseLike(e){
+    const likesDisplay = document.querySelector('.react-count')
+    const likes = parseInt(likesDisplay.textContent)
+
+        fetch(textEntryURL+`${e.target.dataset.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ likes: likes + 1 })
+        })
+            .then(response => response.json())
+            .then(data => {
+                likesDisplay.textContent = `${data.likes} likes`
+            })
 }
 
 
