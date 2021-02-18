@@ -8,8 +8,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="index.js" defer></script>
-    <link rel="stylesheet" type="text/css" href="/dist/css/styles.min.css">
-    <link rel="stylesheet" type="text/css" href="/dist/css/styles.min.css.map">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css.map">
     <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TimelineMax.min.js"></script>
@@ -24,7 +24,7 @@
             <div class="m-logo">
                 <div class="m-logo__wrap">
                     <h1>Die<br/>MadLibs</h1>
-                    <div class="subtitle">A Game From the Distant Past<br>Styled Like the Future<br>As Thought By the Recent Past</div>
+                    <div class="subtitle">A Game From the Distant Past<br>Styled Like the Future<br>As Imagined By the Recent Past</div>
                     <br>
                     <div class="login">Shall We Play a Game?</div>
                 </div>
@@ -79,6 +79,22 @@
             <p>Story abt Fun Times</p>
             </div>
         </div>
+
+        <div class="card not-hidden" data-id="4">
+            <img class = "story-picture" data-id="4" src="http://igeekout.net/wp-content/uploads/2016/06/RoyBatty.jpg" alt="Avatar" style="width:100%">
+        <div class="container">
+            <h4><b>Mad Libs Story 4</b></h4>
+            <p>Story abt Fun Times</p>
+            </div>
+        </div>
+
+        <div class="card not-hidden" data-id="5">
+            <img class = "story-picture" data-id="5" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Pair_programming_1.jpg" alt="Avatar" style="width:100%">
+        <div class="container">
+            <h4><b>Mad Libs Story 5</b></h4>
+            <p>Story abt Fun Times</p>
+            </div>
+        </div>
     </div>
 
 <!-- mad libs story populates here -->
@@ -107,11 +123,21 @@
     <input data-id="userID"  class="delete" type="image" src="/assets/delete user.jpg" name="logout" width="145" height="200" alt="logout"/>  
     <input data-id="userID"  class="logout" type="image" src="/assets/logout.jpg" name="delete" width="195" height="200" alt="delete"/>  
 
+    <div>
+        <audio volume="0.5"  autoplay controls preload="auto" src="assets/music2.mp3" type="audio/mp3">
+            <!-- <source src="assets/music2.mp3" type="audio/mp3"> -->
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+<div id="other-user-story-container" class="show">
+    <h3>Other User Stories:</h3>
+    <ul class="other-user-stories-list"></ul>
 </div>
-<audio controls preload="auto">
-    <source autoplay src="assets/music2.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-  </audio>
+
 </div>
+
+
+
 </body>
 </html> 
