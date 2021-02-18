@@ -17,6 +17,7 @@ const mainScreen = document.querySelector("#main-page")
 const deleteUserBtn = document.querySelector(".delete")
 const logoutBtn = document.querySelector(".logout")
 const osUL = document.querySelector(".other-user-stories-list")
+const osOL = document.querySelector(".top-five-list")
 const osContainer = document.querySelector("other-user-story-container")
 
 // ********** Event Listeners **********
@@ -36,6 +37,11 @@ function fetchOtherTextEntries(){
     .then(response => response.json())
 }
 
+function fetchTopFive(){
+    return fetch(textEntryURL + `fav`)
+    .then(response => response.json())
+}
+
 function showOtherUserStories(res){
     res.forEach(res => {
         li = document.createElement("li")
@@ -43,6 +49,17 @@ function showOtherUserStories(res){
         li.dataset.input = res.id
         li.dataset.id = res.user_id
         osUL.append(li)
+        li.addEventListener('click', showOthersSavedStory)
+    })
+}
+
+function showTopFive(res){
+    res.forEach(res => {
+        li = document.createElement("li")
+        li.innerText = res.title
+        li.dataset.input = res.id
+        li.dataset.id = res.user_id
+        osOL.append(li)
         li.addEventListener('click', showOthersSavedStory)
     })
 }
@@ -66,12 +83,15 @@ function showOthersSavedStory(e){
     let p = document.createElement("p")
     p.className = "react-count"
     p.innerText = `${response.likes} likes`
-    let button = document.createElement("button")
-    button.className = "like-button"
-    button.dataset.id = otherID
-    button.innerText = "♥️ Like"
-    button.addEventListener('click', increaseLike)
-    p.append(button)
+    if (parseInt(otherID) !== userId){
+        let button = document.createElement("button")
+        button.className = "like-button"
+        button.dataset.id = otherID
+        button.innerText = "♥️ Like"
+        button.addEventListener('click', increaseLike)
+        p.append(button)
+        
+    }
     likeDiv.append(p)
     storyContainer.append(div)
     let num = 0
@@ -114,6 +134,7 @@ function deleteUser(e){
     storyContainer.innerHTML = ""
     changeFormIDs(1)
     osUL.innerHTML = ""
+    osOL.innerHTML = ""
 }
 
 function logoutUser(e){
@@ -121,6 +142,7 @@ function logoutUser(e){
     mainScreen.className = "hide"
     storyContainer.innerHTML = ""
     osUL.innerHTML = ""
+    osOL.innerHTML = ""
     changeFormIDs(1)
 }
 
@@ -206,6 +228,7 @@ function decodeResponse(res){
     } else if (!!res[0]){
         changeFormIDs(res[0].id)
         fetchOtherTextEntries().then(showOtherUserStories)
+        fetchTopFive().then(showTopFive)
         splashScreen.className = "hide"
         mainScreen.className = "show"
         modal.style = "display: none"
@@ -213,6 +236,7 @@ function decodeResponse(res){
     } else if (!!res.id){
         changeFormIDs(res.id)
         fetchOtherTextEntries().then(showOtherUserStories)
+        fetchTopFive().then(showTopFive)
         splashScreen.className = "hide"
         mainScreen.className = "show"
         modal.style = "display: none"
