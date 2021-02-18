@@ -3,13 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <link rel="shortcut icon" type="image/jpg" href="/assets/download.png"/>
+    <title>Die Mad Libs</title>
+    <link rel="shortcut icon" type="image/jpg" href="assets/download.png"/>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="index.js" defer></script>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
-    <link rel="stylesheet" type="text/css" href="/css/styles.css.map">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" type="text/css" href="css/styles.css.map"> -->
     <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TimelineMax.min.js"></script>
@@ -17,8 +19,9 @@
 </head>
 
 <body>
+    <div class="grid-container">
     <!-- splashscreen -->
-    <div id="splashscreen" class="show">
+    <div id="splashscreen" class="hide">
         <div class="wrapper">
             <div class="m-grid"></div>
             <div class="m-logo">
@@ -34,110 +37,139 @@
     <!-- The Modal -->
     <div id="myModal" class="modal">
     
-      <!-- Modal content -->
-      <div class="modal-content">
+    <!-- Modal content -->
+    <div class="modal-content">
         <span class="close">&times;</span>
-        <form class="login-form">
-            <label for="username">Username:</label>
-            <input required type="text" id="username" name="username">
-            <label for="age">Age:</label>
-            <input required type="number" id="age" name="age">
-            <input type="submit" name="Log In" value="Login" />
-            <input type="submit" name="Sign Up" value="Signup" />
-          </form>
-      </div>
-    
+            <form class="login-form">
+                <label for="username">Username:</label>
+                <input required type="text" id="username" name="username">
+                <label for="age">Age:</label>
+                <input required type="number" id="age" name="age">
+                <input type="submit" name="Log In" value="Login" />
+                <input type="submit" name="Sign Up" value="Signup" />
+            </form>
+        </div>
     </div>
 
+    <!-- Side Nav Bar -->
+    <input type="checkbox" id="check" class="show">
+    <label for="check">
+        <i class="fas fa-bars" id="btn"></i>
+        <i class="fas fa-times" id="cancel"></i>
+    </label>
+    <div class="sidebar">
+        <div class="nav-div">
+            <img src="assets/die-mad-libs-logo.png" height="75%" width="75%" alt="logo">
+            <!-- <header><br></header> -->
+            <header class="pressed">SAVED STORIES</header>
+                <ul class="" id="ssUL">
+                    <li>An Awesome Story</li>
+                    <li>story 2</li>
+                    <li>An Awesome Story</li>
+                    <li>story 2</li>
+                </ul>
+            <a href="#" data-id="userID"  class="logout" name="logout">
+                <i class="fab fa-angellist" id="logout"></i>
+                <span>Logout</span>
+            </a>      
+            <a href="#" data-id="userID"  class="delete" name="delete">
+                <i class="fas fa-skull-crossbones" id="delete-user"></i>
+                <span>Delete User</span>
+            </a> 
+            <!-- Music -->
+            <br>
+            <center>
+            <audio volume="0.5"  autoplay controls preload="auto" src="assets/music2.mp3" type="audio/mp3">
+                <!-- <source src="assets/music2.mp3" type="audio/mp3"> -->
+                Your browser does not support the audio element.
+            </audio>
+            </center>
+        </div>
+    </div>
 
     <!-- main page -->
-    <div id="main-page" class="hide">
-    <!-- story cards -->
-    <div class="parent">
-    <div id="cards-container" class="card-div">
-        <div class="card not-hidden" data-id="1">
-            <img class = "story-picture" data-id="1" src="https://i2.wp.com/www.ifitshipitshere.com/wp-content/uploads/2010/08/Screen-Shot-2016-08-17-at-12.46.45-PM.png?resize=800%2C672&ssl=1" alt="Avatar" style="width:100%">
-        <div class="container">
-            <h4><b>Mad Libs Story</b></h4>
-            <p>Story abt Fun Times</p>
+    <!-- <div id="main-page" class="show"> -->
+        <div id="story-option-div">
+                <!-- story cards -->
+            <div id="cards-container" class="card-div">
+                <div class="card not-hidden" data-id="1">
+                    <img class = "story-picture" data-id="1" src="https://i2.wp.com/www.ifitshipitshere.com/wp-content/uploads/2010/08/Screen-Shot-2016-08-17-at-12.46.45-PM.png?resize=800%2C672&ssl=1" alt="Avatar" style="width:100%">
+                    <div class="container">
+                        <h4><b>Mad Libs Story</b></h4>
+                        <p>Story abt Fun Times</p>
+                    </div>
+                </div>
+        
+                <div class="card not-hidden" data-id="2">
+                    <img class = "story-picture" data-id="2" src="https://d5qsyj6vaeh11.cloudfront.net/images/destinations/limerick-top-five-experiences/limerick-5-things-new-we-rec.jpg" alt="Avatar" style="width:100%">
+                    <div class="container">
+                        <h4><b>Mad Libs Story 2 </b></h4>
+                        <p>Limerick</p>
+                    </div>
+                </div>
+        
+                <div class="card not-hidden" data-id="3">
+                    <img class = "story-picture" data-id="3" src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Lancaster_County_Amish_03.jpg" alt="Avatar" style="width:100%">
+                <div class="container">
+                    <h4><b>Mad Libs Story 3</b></h4>
+                    <p>Story abt Fun Times</p>
+                    </div>
+                </div>
+        
+                <div class="card not-hidden" data-id="4">
+                    <img class = "story-picture" data-id="4" src="http://igeekout.net/wp-content/uploads/2016/06/RoyBatty.jpg" alt="Avatar" style="width:100%">
+                <div class="container">
+                    <h4><b>Mad Libs Story 4</b></h4>
+                    <p>Story abt Fun Times</p>
+                    </div>
+                </div>
+        
+                <div class="card not-hidden" data-id="5">
+                    <img class = "story-picture" data-id="5" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Pair_programming_1.jpg" alt="Avatar" style="width:100%">
+                <div class="container">
+                    <h4><b>Mad Libs Story 5</b></h4>
+                    <p>Story abt Fun Times</p>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="card not-hidden" data-id="2">
-          <img class = "story-picture" data-id="2" src="https://d5qsyj6vaeh11.cloudfront.net/images/destinations/limerick-top-five-experiences/limerick-5-things-new-we-rec.jpg" alt="Avatar" style="width:100%">
-          
-      <div class="container">
-            <h4><b>Mad Libs Story 2 </b></h4>
-            <p>Limerick</p>
-          </div>
-      </div>
+        <div class="side-nav">
+            <!-- left intentionally blank -->
+        </div>
 
-        <div class="card not-hidden" data-id="3">
-            <img class = "story-picture" data-id="3" src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Lancaster_County_Amish_03.jpg" alt="Avatar" style="width:100%">
-        <div class="container">
-            <h4><b>Mad Libs Story 3</b></h4>
-            <p>Story abt Fun Times</p>
+        <div class="center-container">
+            <!-- mad libs story populates here -->
+            <div class="main">
+                <div class="hide" id="mad-libs-story"> </div>
+                <div class="button-div">
+                    <button class="hide" id="delete-story-btn" type="button" data-id="Add id here">Die, die, die my darling</button>
+                </div>
+                <!-- user input form is here -->
+                <form class="not-hidden" id='input-form' > 
+                    <input type="hidden" value="User id" id="number"/> 
+                </form>
+            
+                <!-- form to save your mad lib story is here -->
+                <form class ="hide" id="save-your-mad-lib">
+                    <input type="text" placeholder="Title Your Mad Lib" id="name"/>
+                    <input type="submit" value="Save the Mad Lib"/>
+                </form>
             </div>
         </div>
 
-        <div class="card not-hidden" data-id="4">
-            <img class = "story-picture" data-id="4" src="http://igeekout.net/wp-content/uploads/2016/06/RoyBatty.jpg" alt="Avatar" style="width:100%">
-        <div class="container">
-            <h4><b>Mad Libs Story 4</b></h4>
-            <p>Story abt Fun Times</p>
+        <div class="left-container">
+            <div id="other-user-story-container" class="show">
+                <h3>Other User Stories:</h3>
+                <ul class="other-user-stories-list"></ul>
             </div>
         </div>
 
-        <div class="card not-hidden" data-id="5">
-            <img class = "story-picture" data-id="5" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Pair_programming_1.jpg" alt="Avatar" style="width:100%">
-        <div class="container">
-            <h4><b>Mad Libs Story 5</b></h4>
-            <p>Story abt Fun Times</p>
-            </div>
+        <div class="footer">
+            <p>made with love by some bad mamajamas</p>
         </div>
     </div>
 
-<!-- mad libs story populates here -->
-    <div class="main">
-        <div class="hide" id="mad-libs-story"> </div>
-        <div class="button-div">
-            <button class="hide" id="delete-story-btn" type="button" data-id="Add id here">Die, die, die my darling</button>
-        </div>
-<!-- user input form is here -->
-        <form class="not-hidden" id='input-form' > 
-            <input type="hidden" value="User id" id="number"/> 
-        </form>
-    
-<!-- form to save your mad lib story is here -->
-        <form class ="hide" id="save-your-mad-lib">
-            <input type="text" placeholder="Title Your Mad Lib" id="name"/>
-            <input type="submit" value="Save the Mad Lib"/>
-        </form>
-    </div>
-
-<!-- saved stories nav -->
-    <div class="nav-div">
-    <h1 class="pressed">Saved Stories</h1>
-        <ul class="" id="ssUL"></ul>
-    </div>
-    <input data-id="userID"  class="delete" type="image" src="/assets/delete user.jpg" name="logout" width="145" height="200" alt="logout"/>  
-    <input data-id="userID"  class="logout" type="image" src="/assets/logout.jpg" name="delete" width="195" height="200" alt="delete"/>  
-
-    <div>
-        <audio volume="0.5"  autoplay controls preload="auto" src="assets/music2.mp3" type="audio/mp3">
-            <!-- <source src="assets/music2.mp3" type="audio/mp3"> -->
-            Your browser does not support the audio element.
-        </audio>
-    </div>
-
-<div id="other-user-story-container" class="show">
-    <h3>Other User Stories:</h3>
-    <ul class="other-user-stories-list"></ul>
-</div>
-
-</div>
-
-
-
+    </div> <!--closing div for grid container-->
 </body>
 </html> 
