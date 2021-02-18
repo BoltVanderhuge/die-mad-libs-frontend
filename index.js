@@ -49,6 +49,7 @@ function showOtherUserStories(res){
 
 function showOthersSavedStory(e){
     const madlibID = parseInt(e.target.dataset.id)
+    inputForm.className= "hide"
     deleteBtn.className = "hide"
     const otherID = e.target.dataset.input
     fetch(userURL + `/${e.target.dataset.id}`+`/${otherID}`)
@@ -224,6 +225,25 @@ function renderMadLibs() {
     .then(response => response.json())
 }
 
+renderMadLibs().then(renderMadLibsCards)
+
+function renderMadLibsCards(res){
+    res.forEach(res => {
+        card = document.createElement("card")
+
+        card.innerHTML= `
+        <div class="card not-hidden" data-id="${res.id}">
+        <img class = "story-picture" data-id="${res.id}" src= ${res.picture} alt="Avatar" style="width:100%">
+    <div class="container">
+        <h4><b>${res.title}</b></h4>
+        <p>${res.description}</p>
+        </div>
+    </div>
+`
+cardsContainer.append(card)
+    }) 
+}
+
 function fetchAMadlib(e) {
     if (e.target.className === "story-picture"){
     // cardsContainer.className = "hide"
@@ -358,4 +378,6 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+
 
