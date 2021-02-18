@@ -16,6 +16,8 @@ const splashScreen = document.querySelector("#splashscreen")
 const mainScreen = document.querySelector("#main-page")
 const deleteUserBtn = document.querySelector(".delete")
 const logoutBtn = document.querySelector(".logout")
+const osUL = document.querySelector(".other-user-stories-list")
+const osContainer = document.querySelector("other-user-story-container")
 
 // ********** Event Listeners **********
 inputForm.addEventListener('submit', updateStory)
@@ -28,19 +30,67 @@ logoutBtn.addEventListener('click', logoutUser)
 
 // ********** Functions **********
 
+
+function fetchOtherTextEntries(){
+    return fetch(textEntryURL + `${userId}/user`)
+    .then(response => response.json())
+}
+
+function showOtherUserStories(res){
+    res.forEach(res => {
+        li = document.createElement("li")
+        li.innerText = res.title
+        li.dataset.input = res.id
+        li.dataset.id = res.user_id
+        osUL.append(li)
+        li.addEventListener('click', showOthersSavedStory)
+    })
+}
+
+function showOthersSavedStory(e){
+    const madlibID = parseInt(e.target.dataset.id)
+    deleteBtn.className = "hide"
+    const otherID = e.target.dataset.input
+    fetch(userURL + `/${e.target.dataset.id}`+`/${otherID}`)
+    .then(response => response.json())
+    .then(response => {
+    let responses = response.inputs.split(",")
+    let story = response.mad_story
+    storyContainer.innerHTML = ""
+    let div = document.createElement("div")
+    div.className = "current-story"
+    div.innerHTML = story
+    storyContainer.append(div)
+    let num = 0
+    let inputs = document.querySelectorAll('#input')
+    inputs.forEach(input => {
+        let response = responses[`${num}`]
+        input.innerHTML = response
+        num += 1
+    });
+    storyContainer.className = "not-hidden"
+ 
+    })
+}
+
+
+
 function deleteUser(e){
     fetch(userURL + `/${e.target.dataset.id}`, {
         method: "DELETE"
     })
-
     splashScreen.className = "show"
     mainScreen.className = "hide"
+    storyContainer.innerHTML = ""
     changeFormIDs(1)
+    osUL.innerHTML = ""
 }
 
 function logoutUser(e){
     splashScreen.className = "show"
     mainScreen.className = "hide"
+    storyContainer.innerHTML = ""
+    osUL.innerHTML = ""
     changeFormIDs(1)
 }
 
@@ -68,39 +118,30 @@ function populateSavedStories(text_entries){
 
 function showSavedStory(e){
     const madlibID = parseInt(e.target.dataset.id)
+    inputForm.className = "hide"
     const otherID = e.target.dataset.input
     fetch(userURL + `/${userId}`+`/${otherID}`)
     .then(response => response.json())
     .then(response => {
-        let responses = response.inputs.split(",")
-        let response1 = responses[0]
-        let response2 = responses[1]
-        let response3 = responses[2]
-        let response4 = responses[3]
-        let story = response.mad_story
+    let responses = response.inputs.split(",")
+    let story = response.mad_story
     storyContainer.innerHTML = ""
     let div = document.createElement("div")
     div.className = "current-story"
     div.innerHTML = story
     storyContainer.append(div)
-    const input1 = document.querySelector('#input1')
-    const input2 = document.querySelector('#input2')
-    const input3 = document.querySelector('#input3')
-    const input4 = document.querySelector('#input4')
-    let target1 = response1
-    let target2 = response2
-    let target3  = response3
-    let target4 = response4
-    input1.innerHTML = target1
-    input2.innerHTML = target2
-    input3.innerHTML = target3
-    input4.innerHTML = target4
+    let num = 0
+    let inputs = document.querySelectorAll('#input')
+    inputs.forEach(input => {
+        let response = responses[`${num}`]
+        input.innerHTML = response
+        num += 1
+    });
     storyContainer.className = "not-hidden"
     deleteBtn.className = "not-hidden"
     deleteBtn.dataset.id = otherID
     })
 }
-
 
 
 function loginPrompt(e){
@@ -113,7 +154,6 @@ function loginPrompt(e){
 
     if (buttonValue === "Signup"){
         createAUser(userObj)
-        audioObj.play()
     } else if (buttonValue === "Login"){
         fetchAUser(userObj)
         
@@ -135,12 +175,18 @@ function decodeResponse(res){
         alert(`${res.message}`);
     } else if (!!res[0]){
         changeFormIDs(res[0].id)
+        fetchOtherTextEntries().then(showOtherUserStories)
         splashScreen.className = "hide"
         mainScreen.className = "show"
+        modal.style = "display: none"
+        loginForm.reset()
     } else if (!!res.id){
         changeFormIDs(res.id)
+        fetchOtherTextEntries().then(showOtherUserStories)
         splashScreen.className = "hide"
         mainScreen.className = "show"
+        modal.style = "display: none"
+        loginForm.reset()
     } else 
         alert("Username or age is incorrect")
     
@@ -150,10 +196,8 @@ function fetchAUser(userObj){
     return fetch(userURL + `/${userObj.name}`+ `/${userObj.age}/user`)
     .then(response => response.json())
     .then(decodeResponse)
-    // .then(response => console.log(response))
+    
 }
-
-
 
 
 function deleteSavedStory(e){
@@ -183,6 +227,7 @@ function renderMadLibs() {
 function fetchAMadlib(e) {
     if (e.target.className === "story-picture"){
     // cardsContainer.className = "hide"
+    deleteBtn.className = "hide"
     const hTMLID = e.target.dataset.id
     return fetch(madLibURL + `/${hTMLID}`)
     .then(response => response.json())
@@ -208,19 +253,14 @@ function renderAMadlib(madLib){
 
 function updateStory(e){
     e.preventDefault()
-    
-    const input1 = document.querySelector('#input1')
-    const input2 = document.querySelector('#input2')
-    const input3 = document.querySelector('#input3')
-    const input4 = document.querySelector('#input4')
-    let target1 = e.target[1].value
-    let target2 = e.target[2].value
-    let target3  = e.target[3].value
-    let target4 = e.target[4].value
-    input1.innerHTML = target1
-    input2.innerHTML = target2
-    input3.innerHTML = target3
-    input4.innerHTML = target4
+    let inputs = document.querySelectorAll('#input')
+    let num = 1
+    inputs.forEach(node => {
+        let target = e.target[`${num}`].value
+        node.innerHTML = target
+        num += 1
+    })
+
     inputForm.reset()
     storyContainer.className = "not-hidden"
     inputForm.className = "hide"
@@ -231,18 +271,17 @@ function saveStory(e) {
     e.preventDefault()
     const mad_lib_id = parseInt(document.querySelector('.current-story').dataset.id)
     const title = e.target[0].value
-    
-    const input1 = document.querySelector('#input1')
-    const input2 = document.querySelector('#input2')
-    const input3 = document.querySelector('#input3')
-    const input4 = document.querySelector('#input4')
     let user_id = parseInt(inputForm.number.value)
-    let target1 = input1.innerHTML
-    let target2 = input2.innerHTML
-    let target3 = input3.innerHTML
-    let target4 = input4.innerHTML
+
+    let inputs = document.querySelectorAll('#input')
+    let inputsArr = []
+    let num = 0
+    inputs.forEach(node => {
+        inputsArr[num] = node.innerHTML
+        num += 1
+    })
     const postObj = { 
-        user_inputs: `${target1},${target2},${target3},${target4}`,
+        user_inputs: `${inputsArr}`,
         mad_lib_id, user_id, title
     }
     fetch(textEntryURL, {
@@ -260,6 +299,7 @@ function saveStory(e) {
         ssUL.append(li)
     })
     saveForm.className = "hide"
+    saveForm.reset()
 }
 
 try {
