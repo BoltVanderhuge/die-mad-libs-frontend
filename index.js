@@ -17,6 +17,7 @@ const mainScreen = document.querySelector("#main-page")
 const deleteUserBtn = document.querySelector(".delete")
 const logoutBtn = document.querySelector(".logout")
 const osUL = document.querySelector(".other-user-stories-list")
+const osOL = document.querySelector(".top-five-list")
 const osContainer = document.querySelector("other-user-story-container")
 
 
@@ -38,6 +39,11 @@ function fetchOtherTextEntries(){
     .then(response => response.json())
 }
 
+function fetchTopFive(){
+    return fetch(textEntryURL + `fav`)
+    .then(response => response.json())
+}
+
 function showOtherUserStories(res){
     res.forEach(res => {
         li = document.createElement("li")
@@ -49,8 +55,20 @@ function showOtherUserStories(res){
     })
 }
 
+function showTopFive(res){
+    res.forEach(res => {
+        li = document.createElement("li")
+        li.innerText = res.title
+        li.dataset.input = res.id
+        li.dataset.id = res.user_id
+        osOL.append(li)
+        li.addEventListener('click', showOthersSavedStory)
+    })
+}
+
 function showOthersSavedStory(e){
     const madlibID = parseInt(e.target.dataset.id)
+    inputForm.className= "hide"
     deleteBtn.className = "hide"
     const otherID = e.target.dataset.input
     fetch(userURL + `/${e.target.dataset.id}`+`/${otherID}`)
@@ -62,6 +80,21 @@ function showOthersSavedStory(e){
     let div = document.createElement("div")
     div.className = "current-story"
     div.innerHTML = story
+    let likeDiv = document.createElement("div")
+    div.append(likeDiv)
+    let p = document.createElement("p")
+    p.className = "react-count"
+    p.innerText = `${response.likes} likes`
+    if (parseInt(otherID) !== userId){
+        let button = document.createElement("button")
+        button.className = "like-button"
+        button.dataset.id = otherID
+        button.innerText = "♥️ Like"
+        button.addEventListener('click', increaseLike)
+        p.append(button)
+        
+    }
+    likeDiv.append(p)
     storyContainer.append(div)
     let num = 0
     let inputs = document.querySelectorAll('#input')
@@ -73,6 +106,23 @@ function showOthersSavedStory(e){
     storyContainer.className = "not-hidden"
  
     })
+}
+
+function increaseLike(e){
+    const likesDisplay = document.querySelector('.react-count')
+    const likes = parseInt(likesDisplay.textContent)
+
+        fetch(textEntryURL+`${e.target.dataset.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ likes: likes + 1 })
+        })
+            .then(response => response.json())
+            .then(data => {
+                likesDisplay.textContent = `${data.likes} likes`
+            })
 }
 
 
@@ -87,6 +137,7 @@ function deleteUser(e){
     storyContainer.innerHTML = ""
     changeFormIDs(1)
     osUL.innerHTML = ""
+    osOL.innerHTML = ""
 }
 
 function logoutUser(e){
@@ -94,6 +145,7 @@ function logoutUser(e){
     mainScreen.className = "hide"
     storyContainer.innerHTML = ""
     osUL.innerHTML = ""
+    osOL.innerHTML = ""
     changeFormIDs(1)
 }
 
@@ -179,6 +231,7 @@ function decodeResponse(res){
     } else if (!!res[0]){
         changeFormIDs(res[0].id)
         fetchOtherTextEntries().then(showOtherUserStories)
+        fetchTopFive().then(showTopFive)
         splashScreen.className = "hide"
         mainScreen.className = "show"
         modal.style = "display: none"
@@ -186,6 +239,7 @@ function decodeResponse(res){
     } else if (!!res.id){
         changeFormIDs(res.id)
         fetchOtherTextEntries().then(showOtherUserStories)
+        fetchTopFive().then(showTopFive)
         splashScreen.className = "hide"
         mainScreen.className = "show"
         modal.style = "display: none"
@@ -225,6 +279,25 @@ function fetchUserTextEntries() {
 function renderMadLibs() {
     return fetch(madLibURL)
     .then(response => response.json())
+}
+
+renderMadLibs().then(renderMadLibsCards)
+
+function renderMadLibsCards(res){
+    res.forEach(res => {
+        card = document.createElement("card")
+
+        card.innerHTML= `
+        <div class="card not-hidden" data-id="${res.id}">
+        <img class = "story-picture" data-id="${res.id}" src= ${res.picture} alt="Avatar" style="width:100%">
+    <div class="container">
+        <h4><b>${res.title}</b></h4>
+        <p>${res.description}</p>
+        </div>
+    </div>
+`
+cardsContainer.append(card)
+    }) 
 }
 
 function fetchAMadlib(e) {
@@ -361,4 +434,6 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+
 
