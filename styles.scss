@@ -1,6 +1,36 @@
+// FONTS
+@import url("https://fonts.googleapis.com/css?family=Monoton");
+@import url("https://fonts.googleapis.com/css?family=Press+Start+2P");
+@import url("https://fonts.googleapis.com/css?family=Mr+Dafoe");
+@import url("https://fonts.googleapis.com/css?family=Changa+One");
+
+
+*{
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
 .hide {
   opacity: 0;
   display: none;
+}
+
+:root {
+  --accent-color: #fff;
+  --gradient-color: #FBFBFB;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(https://media.giphy.com/media/iI4vhciiVh2b3j9sgo/giphy.gif);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #main-page {
@@ -18,10 +48,6 @@
 }
 
 
-@import url("https://fonts.googleapis.com/css?family=Monoton");
-@import url("https://fonts.googleapis.com/css?family=Press+Start+2P");
-@import url("https://fonts.googleapis.com/css?family=Mr+Dafoe");
-@import url("https://fonts.googleapis.com/css?family=Changa+One");
 
 #splashscreen {
   background: #000;
