@@ -19,7 +19,9 @@ const logoutBtn = document.querySelector(".logout")
 const osUL = document.querySelector(".other-user-stories-list")
 const osContainer = document.querySelector("other-user-story-container")
 
-// ********** Event Listeners **********
+
+//--------------------EVENT LISTENERS--------------------//
+
 inputForm.addEventListener('submit', updateStory)
 cardsContainer.addEventListener('click', fetchAMadlib)
 saveForm.addEventListener('submit', saveStory)
@@ -28,7 +30,7 @@ loginForm.addEventListener('submit', loginPrompt)
 deleteUserBtn.addEventListener('click', deleteUser)
 logoutBtn.addEventListener('click', logoutUser)
 
-// ********** Functions **********
+//--------------------FUNCTIONS--------------------//
 
 
 function fetchOtherTextEntries(){
@@ -74,6 +76,7 @@ function showOthersSavedStory(e){
 }
 
 
+// User Functionality
 
 function deleteUser(e){
     fetch(userURL + `/${e.target.dataset.id}`, {
