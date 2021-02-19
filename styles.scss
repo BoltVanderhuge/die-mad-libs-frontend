@@ -92,16 +92,15 @@ body {
 
 .center-container {
   grid-area: center-container;
-  border: 5px solid #52d6f4;
-  // border-top-right-radius: ;
-  border-radius: 10% 0%; 
+  border: 5px solid #ec008c;
   background-color: #fefefe;
   padding: 50px;
   margin: 20px;
   opacity: 0.8;
+  opacity: 0.9;
   margin-left: 200px;
-  margin-right: auto;
-  width: 50%;
+  margin-right: 200px;
+  width: 75%;
 }
 
 .center-container input{
@@ -138,7 +137,7 @@ body {
 
 .left-container { 
   grid-area: left-container;
-  border: 5px solid coral;
+  border: 5px solid aquamarine;
   border-radius: 10px; 
   background-color: #fefefe;
   padding: 50px;
@@ -547,17 +546,19 @@ p {
 .cards-container {
   grid-area: cards-container;
   display: flex;
-  padding-left: 1rem;
+  padding-left: 150px;
   overflow-x: auto;
   -ms-overflow-style: none;
 	scrollbar-width: none;
-	padding-left: 10px;
+	// padding-left: 10px;
 	scroll-behavior: smooth;
   
 }
 .card {
     margin: .5em;
-    border-radius: 10px;
+    padding: 5px;
+    border: 1px solid #d6adff;
+    border-radius: 1px;
     color: darkslateblue;
     background-color: white;
 
@@ -585,7 +586,8 @@ p {
 }
 
 .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  box-shadow: 10px 10px #d6adff;
+  border: 3px solid #d6adff;
 }
 
 
