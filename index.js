@@ -68,7 +68,7 @@ function showTopFive(res){
 }
 
 function showOthersSavedStory(e){
-    const madlibID = parseInt(e.target.dataset.id)
+    const liUser = parseInt(e.target.dataset.id)
     inputForm.className= "hide"
     deleteBtn.className = "hide"
     const otherID = e.target.dataset.input
@@ -86,7 +86,7 @@ function showOthersSavedStory(e){
     let p = document.createElement("p")
     p.className = "react-count"
     p.innerText = `${response.likes} likes`
-    if (parseInt(otherID) !== userId){
+    if (parseInt(liUser) !== userId){
         let button = document.createElement("button")
         button.className = "like-button"
         button.dataset.id = otherID
