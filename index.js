@@ -4,16 +4,17 @@ userURL = 'http://localhost:3000/users'
 
 // renderMadLibs().then(renderAMadlib)
 let userId 
+const sideBar = document.querySelector("#sidebar")
 const storyContainer = document.querySelector('#mad-libs-story')
 const inputForm = document.querySelector('#input-form')
 const saveForm = document.querySelector('#save-your-mad-lib')
-const cardsContainer = document.querySelector('#cards-container')
+const cardsContainer = document.querySelector('.cards-container')
 const ssUL = document.querySelector('#ssUL')
 const deleteBtn = document.querySelector('#delete-story-btn')
 const loginModal = document.querySelector(".login")
 const loginForm = document.querySelector(".login-form")
 const splashScreen = document.querySelector("#splashscreen")
-const mainScreen = document.querySelector("#main-page")
+// const mainScreen = document.querySelector("#main-page")
 const deleteUserBtn = document.querySelector(".delete")
 const logoutBtn = document.querySelector(".logout")
 const osUL = document.querySelector(".other-user-stories-list")
@@ -133,20 +134,27 @@ function deleteUser(e){
         method: "DELETE"
     })
     splashScreen.className = "show"
-    mainScreen.className = "hide"
+    gridLayout.style = "display: none"
+    // mainScreen.className = "hide"
+    sideBar.className = "hide"
     storyContainer.innerHTML = ""
     changeFormIDs(1)
     osUL.innerHTML = ""
     osOL.innerHTML = ""
+    deleteBtn.className = "hide"
+
 }
 
 function logoutUser(e){
+    deleteBtn.className = "hide"
     splashScreen.className = "show"
-    mainScreen.className = "hide"
+    // mainScreen.className = "hide"
+    sideBar.className = "hide"
     storyContainer.innerHTML = ""
     osUL.innerHTML = ""
     osOL.innerHTML = ""
     changeFormIDs(1)
+    gridLayout.style = "display: none"
 }
 
 
@@ -233,16 +241,20 @@ function decodeResponse(res){
         fetchOtherTextEntries().then(showOtherUserStories)
         fetchTopFive().then(showTopFive)
         splashScreen.className = "hide"
-        mainScreen.className = "show"
+        sideBar.className = "show"
+        // mainScreen.className = "show"
         modal.style = "display: none"
+        gridLayout.style = "display: grid"
         loginForm.reset()
     } else if (!!res.id){
         changeFormIDs(res.id)
         fetchOtherTextEntries().then(showOtherUserStories)
         fetchTopFive().then(showTopFive)
         splashScreen.className = "hide"
-        mainScreen.className = "show"
+        // mainScreen.className = "show"
+        sideBar.className = "show"
         modal.style = "display: none"
+        gridLayout.style = "display: grid"
         loginForm.reset()
     } else 
         alert("Username or age is incorrect")
@@ -285,16 +297,16 @@ renderMadLibs().then(renderMadLibsCards)
 
 function renderMadLibsCards(res){
     res.forEach(res => {
-        card = document.createElement("card")
+        card = document.createElement("div")
+        card.className = "card"
+        card.dataset.id = res.id
 
         card.innerHTML= `
-        <div class="card not-hidden" data-id="${res.id}">
-        <img class = "story-picture" data-id="${res.id}" src= ${res.picture} alt="Avatar" style="width:100%">
-    <div class="container">
-        <h4><b>${res.title}</b></h4>
-        <p>${res.description}</p>
-        </div>
-    </div>
+        <img class = "story-picture" data-id="${res.id}" src=${res.picture} alt="Avatar" >
+        <div class="container">
+            <h4><b>${res.description}</b></h4>
+            <p>${res.title}</p>
+        </div>    
 `
 cardsContainer.append(card)
     }) 
@@ -411,6 +423,7 @@ tl.to(grid, 1, {
 
 // Get the modal
 var modal = document.getElementById("myModal");
+var gridLayout = document.getElementById("grid-layout");
 
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
@@ -434,6 +447,8 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+
 
 
 
