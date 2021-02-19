@@ -68,35 +68,42 @@ body {
   background-size: cover;
 }
 
+.splash-container {
+  // display: grid;
+  width: 100%;
+  height: 100%;
+}
+
 
 //--------------GRID CONTAINER ---------------------------
 .grid-container {
-  display: grid;
+  // display: grid;  // turn this on after login
+  display: none;
   width: 100%;
   height: 100%;
   grid-template-columns: 0.9fr 1.3fr 1.5fr 0.6fr;    
   grid-template-rows: 0.5fr 2.3fr 0.2fr;
   gap: 5px 5px;
   grid-template-areas:
-      "side-nav cards-container cards-container ."
-      "side-nav center-container center-container left-container"
-      ". footer footer .";
+  "side-nav cards-container cards-container ."
+  "side-nav center-container center-container left-container"
+  ". footer footer .";
 }
 
-#center-container {
+.center-container {
   grid-area: center-container;
   border: 5px solid #ec008c;
   // border-top-right-radius: ;
   background-color: #fefefe;
   padding: 50px;
   margin: 20px;
-  opacity: 0.9;
+  opacity: 0.8;
   margin-left: 200px;
-  margin-right: 200px;
-  width: 75%;
+  margin-right: auto;
+  width: 50%;
 }
 
-#center-container input{
+.center-container input{
   width: auto;
   height: auto;
   text-align: center;
@@ -107,6 +114,7 @@ body {
 }
 
 .footer {
+  grid-area: footer;
   position: fixed;
   left: 0;
   bottom: 0;
@@ -510,7 +518,7 @@ p {
 
 //----------Cards----------------
 
-#cards-container {
+.cards-container {
   grid-area: cards-container;
   display: flex;
   padding-left: 1rem;
