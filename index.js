@@ -130,7 +130,7 @@ function increaseLike(e){
 // User Functionality
 
 function deleteUser(e){
-    fetch(userURL + `/${e.target.dataset.id}`, {
+    fetch(userURL + `/${e.path[1].dataset.id}`, {
         method: "DELETE"
     })
     splashScreen.className = "show"
