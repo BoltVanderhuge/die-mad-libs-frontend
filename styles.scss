@@ -77,6 +77,7 @@ body {
 
 //--------------GRID CONTAINER ---------------------------
 .grid-container {
+  overflow: auto;
   // display: grid;  // turn this on after login
   display: none;
   width: 100%;

@@ -2,7 +2,7 @@ madLibURL = 'http://localhost:3000/mad_libs'
 textEntryURL = 'http://localhost:3000/text_entries/'
 userURL = 'http://localhost:3000/users'
 
-// renderMadLibs().then(renderAMadlib)
+
 let userId 
 const sideBar = document.querySelector("#sidebar")
 const storyContainer = document.querySelector('#mad-libs-story')
@@ -14,7 +14,6 @@ const deleteBtn = document.querySelector('#delete-story-btn')
 const loginModal = document.querySelector(".login")
 const loginForm = document.querySelector(".login-form")
 const splashScreen = document.querySelector("#splashscreen")
-// const mainScreen = document.querySelector("#main-page")
 const deleteUserBtn = document.querySelector(".delete")
 const logoutBtn = document.querySelector(".logout")
 const osUL = document.querySelector(".other-user-stories-list")
@@ -135,7 +134,6 @@ function deleteUser(e){
     })
     splashScreen.className = "show"
     gridLayout.style = "display: none"
-    // mainScreen.className = "hide"
     sideBar.className = "hide"
     storyContainer.innerHTML = ""
     changeFormIDs(1)
@@ -149,7 +147,6 @@ function deleteUser(e){
 function logoutUser(e){
     deleteBtn.className = "hide"
     splashScreen.className = "show"
-    // mainScreen.className = "hide"
     sideBar.className = "hide"
     storyContainer.innerHTML = ""
     inputForm.className = "hide"
@@ -244,7 +241,6 @@ function decodeResponse(res){
         fetchTopFive().then(showTopFive)
         splashScreen.className = "hide"
         sideBar.className = "show"
-        // mainScreen.className = "show"
         modal.style = "display: none"
         gridLayout.style = "display: grid"
         loginForm.reset()
@@ -253,7 +249,6 @@ function decodeResponse(res){
         fetchOtherTextEntries().then(showOtherUserStories)
         fetchTopFive().then(showTopFive)
         splashScreen.className = "hide"
-        // mainScreen.className = "show"
         sideBar.className = "show"
         modal.style = "display: none"
         gridLayout.style = "display: grid"
@@ -316,7 +311,6 @@ cardsContainer.append(card)
 
 function fetchAMadlib(e) {
     if (e.target.className === "story-picture"){
-    // cardsContainer.className = "hide"
     deleteBtn.className = "hide"
     const hTMLID = e.target.dataset.id
     return fetch(madLibURL + `/${hTMLID}`)
