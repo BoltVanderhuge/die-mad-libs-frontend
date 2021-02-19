@@ -4,6 +4,7 @@ userURL = 'http://localhost:3000/users'
 
 // renderMadLibs().then(renderAMadlib)
 let userId 
+const sideBar = document.querySelector("#sidebar")
 const storyContainer = document.querySelector('#mad-libs-story')
 const inputForm = document.querySelector('#input-form')
 const saveForm = document.querySelector('#save-your-mad-lib')
@@ -134,6 +135,7 @@ function deleteUser(e){
     })
     splashScreen.className = "show"
     mainScreen.className = "hide"
+    sideBar.className = "hide"
     storyContainer.innerHTML = ""
     changeFormIDs(1)
     osUL.innerHTML = ""
@@ -143,6 +145,7 @@ function deleteUser(e){
 function logoutUser(e){
     splashScreen.className = "show"
     mainScreen.className = "hide"
+    sideBar.className = "hide"
     storyContainer.innerHTML = ""
     osUL.innerHTML = ""
     osOL.innerHTML = ""
@@ -233,6 +236,7 @@ function decodeResponse(res){
         fetchOtherTextEntries().then(showOtherUserStories)
         fetchTopFive().then(showTopFive)
         splashScreen.className = "hide"
+        sideBar.className = "show"
         mainScreen.className = "show"
         modal.style = "display: none"
         loginForm.reset()
@@ -242,6 +246,7 @@ function decodeResponse(res){
         fetchTopFive().then(showTopFive)
         splashScreen.className = "hide"
         mainScreen.className = "show"
+        sideBar.className = "show"
         modal.style = "display: none"
         loginForm.reset()
     } else 
@@ -285,16 +290,16 @@ renderMadLibs().then(renderMadLibsCards)
 
 function renderMadLibsCards(res){
     res.forEach(res => {
-        card = document.createElement("card")
+        card = document.createElement("div")
+        card.className = "card"
+        card.dataset.id = res.id
 
         card.innerHTML= `
-        <div class="card not-hidden" data-id="${res.id}">
-        <img class = "story-picture" data-id="${res.id}" src= ${res.picture} alt="Avatar" style="width:100%">
-    <div class="container">
-        <h4><b>${res.title}</b></h4>
-        <p>${res.description}</p>
-        </div>
-    </div>
+        <img class = "story-picture" data-id="${res.id}" src=${res.picture} alt="Avatar" >
+        <div class="container">
+            <h4><b>${res.description}</b></h4>
+            <p>${res.title}</p>
+        </div>    
 `
 cardsContainer.append(card)
     }) 
@@ -434,6 +439,9 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+
+
 
 
 

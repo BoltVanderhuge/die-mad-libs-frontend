@@ -21,7 +21,7 @@
 <body>
     <div class="grid-container">
     <!-- splashscreen -->
-    <div id="splashscreen" class="hide">
+    <div id="splashscreen" class="show">
         <div class="wrapper">
             <div class="m-grid"></div>
             <div class="m-logo">
@@ -29,7 +29,7 @@
                     <h1>Die<br/>MadLibs</h1>
                     <div class="subtitle">A Game From the Distant Past<br>Styled Like the Future<br>As Imagined By the Recent Past</div>
                     <br>
-                    <div class="login">Shall We Play a Game?</div>
+                    <div class="login" id="type">Shall We Play a Game?</div>
                 </div>
             </div>
         </div>      
@@ -43,8 +43,11 @@
             <form class="login-form">
                 <label for="username">Username:</label>
                 <input required type="text" id="username" name="username">
+                <br>
                 <label for="age">Age:</label>
                 <input required type="number" id="age" name="age">
+                <br>
+                <br>
                 <input type="submit" name="Log In" value="Login" />
                 <input type="submit" name="Sign Up" value="Signup" />
             </form>
@@ -52,7 +55,8 @@
     </div>
 
     <!-- Side Nav Bar -->
-    <input type="checkbox" id="check" class="show">
+    <div class ="hide" id="sidebar">
+    <input type="checkbox" id="check" >
     <label for="check">
         <i class="fas fa-bars" id="btn"></i>
         <i class="fas fa-times" id="cancel"></i>
@@ -63,10 +67,7 @@
             <!-- <header><br></header> -->
             <header class="pressed">SAVED STORIES</header>
                 <ul class="" id="ssUL">
-                    <li>An Awesome Story</li>
-                    <li>story 2</li>
-                    <li>An Awesome Story</li>
-                    <li>story 2</li>
+                    
                 </ul>
             <a href="#" data-id="userID"  class="logout" name="logout">
                 <i class="fab fa-angellist" id="logout"></i>
@@ -79,58 +80,21 @@
             <!-- Music -->
             <br>
             <center>
-            <audio volume="0.5"  autoplay controls preload="auto" src="assets/music2.mp3" type="audio/mp3">
+            <!-- <audio volume="0.5"  autoplay controls preload="auto" src="assets/music2.mp3" type="audio/mp3">
                 <!-- <source src="assets/music2.mp3" type="audio/mp3"> -->
                 Your browser does not support the audio element.
-            </audio>
+            </audio> -->
             </center>
         </div>
     </div>
+</div>
 
     <!-- main page -->
-    <!-- <div id="main-page" class="show"> -->
+    <div id="main-page" class="hide">
         <div id="story-option-div">
                 <!-- story cards -->
-            <div id="cards-container" class="card-div">
-                <div class="card not-hidden" data-id="1">
-                    <img class = "story-picture" data-id="1" src="https://i2.wp.com/www.ifitshipitshere.com/wp-content/uploads/2010/08/Screen-Shot-2016-08-17-at-12.46.45-PM.png?resize=800%2C672&ssl=1" alt="Avatar" style="width:100%">
-                    <div class="container">
-                        <h4><b>Mad Libs Story</b></h4>
-                        <p>Story abt Fun Times</p>
-                    </div>
-                </div>
-        
-                <div class="card not-hidden" data-id="2">
-                    <img class = "story-picture" data-id="2" src="https://d5qsyj6vaeh11.cloudfront.net/images/destinations/limerick-top-five-experiences/limerick-5-things-new-we-rec.jpg" alt="Avatar" style="width:100%">
-                    <div class="container">
-                        <h4><b>Mad Libs Story 2 </b></h4>
-                        <p>Limerick</p>
-                    </div>
-                </div>
-        
-                <div class="card not-hidden" data-id="3">
-                    <img class = "story-picture" data-id="3" src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Lancaster_County_Amish_03.jpg" alt="Avatar" style="width:100%">
-                <div class="container">
-                    <h4><b>Mad Libs Story 3</b></h4>
-                    <p>Story abt Fun Times</p>
-                    </div>
-                </div>
-        
-                <div class="card not-hidden" data-id="4">
-                    <img class = "story-picture" data-id="4" src="http://igeekout.net/wp-content/uploads/2016/06/RoyBatty.jpg" alt="Avatar" style="width:100%">
-                <div class="container">
-                    <h4><b>Mad Libs Story 4</b></h4>
-                    <p>Story abt Fun Times</p>
-                    </div>
-                </div>
-        
-                <div class="card not-hidden" data-id="5">
-                    <img class = "story-picture" data-id="5" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Pair_programming_1.jpg" alt="Avatar" style="width:100%">
-                <div class="container">
-                    <h4><b>Mad Libs Story 5</b></h4>
-                    <p>Story abt Fun Times</p>
-                    </div>
-                </div>
+            <div id="cards-container" class="show">
+             
             </div>
         </div>
 
@@ -138,7 +102,7 @@
             <!-- left intentionally blank -->
         </div>
 
-        <div class="center-container">
+        <div id="center-container" class="show" style="text-align: center;">
             <!-- mad libs story populates here -->
             <div class="main">
                 <div class="hide" id="mad-libs-story"> </div>
@@ -158,16 +122,16 @@
             </div>
         </div>
 
-        <div class="left-container">
+        <div class="left-container" >
             <div id="other-user-story-container" class="show">
 
-                <h3>Other User Stories:</h3>
+                <header class="pressed">Other Users' Stories:</header>
                 <ul class="other-user-stories-list"></ul>
 
-                <h3>Random User Stories:</h3>
+                <header class="pressed">Random Stories:</header>
                 <ul class="other-user-stories-list"></ul>
-                <h3>Most Liked Stories:</h3>
-                <ol class="top-five-list"></ol>
+                <header class="pressed">Most Liked Stories:</header>
+                <ul class="top-five-list"></ul>
 
             </div>
         </div>
@@ -176,7 +140,7 @@
             <p>made with love by some bad mamajamas</p>
         </div>
     </div>
-
+</div>
     </div> <!--closing div for grid container-->
 </body>
 </html> 
