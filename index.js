@@ -139,6 +139,7 @@ function deleteUser(e){
     sideBar.className = "hide"
     storyContainer.innerHTML = ""
     changeFormIDs(1)
+    inputForm.className = "hide"
     osUL.innerHTML = ""
     osOL.innerHTML = ""
     deleteBtn.className = "hide"
@@ -151,6 +152,7 @@ function logoutUser(e){
     // mainScreen.className = "hide"
     sideBar.className = "hide"
     storyContainer.innerHTML = ""
+    inputForm.className = "hide"
     osUL.innerHTML = ""
     osOL.innerHTML = ""
     changeFormIDs(1)
