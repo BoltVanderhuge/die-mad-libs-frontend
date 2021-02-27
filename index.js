@@ -1,6 +1,6 @@
-madLibURL = 'http://localhost:3000/mad_libs'
-textEntryURL = 'http://localhost:3000/text_entries/'
-userURL = 'http://localhost:3000/users'
+madLibURL = 'https://die-mad-libs.herokuapp.com/mad_libs'
+textEntryURL = 'https://die-mad-libs.herokuapp.com/text_entries/'
+userURL = 'https://die-mad-libs.herokuapp.com/users'
 
 
 let userId 
@@ -19,6 +19,7 @@ const logoutBtn = document.querySelector(".logout")
 const osUL = document.querySelector(".other-user-stories-list")
 const osOL = document.querySelector(".top-five-list")
 const osContainer = document.querySelector("other-user-story-container")
+const footer = document.querySelector(".footer")
 
 
 //--------------------EVENT LISTENERS--------------------//
@@ -129,7 +130,7 @@ function increaseLike(e){
 // User Functionality
 
 function deleteUser(e){
-    fetch(userURL + `/${e.path[1].dataset.id}`, {
+    fetch((userURL + `/${e.path[1].dataset.id}`), {
         method: "DELETE"
     })
     splashScreen.className = "show"
@@ -162,7 +163,7 @@ function changeFormIDs(Id){
     inputForm.number.value = userId
     deleteUserBtn.dataset.id = userId
     logoutBtn.dataset.id = userId
-
+    
     fetchUserTextEntries().then(populateSavedStories)
 }
 
@@ -185,11 +186,11 @@ function showSavedStory(e){
     fetch(userURL + `/${userId}`+`/${otherID}`)
     .then(response => response.json())
     .then(response => {
-    let responses = response.inputs.split(",")
-    let story = response.mad_story
-    storyContainer.innerHTML = ""
-    let div = document.createElement("div")
-    div.className = "current-story"
+        let responses = response.inputs.split(",")
+        let story = response.mad_story
+        storyContainer.innerHTML = ""
+        let div = document.createElement("div")
+        div.className = "current-story"
     div.innerHTML = story
     storyContainer.append(div)
     let num = 0
@@ -202,18 +203,18 @@ function showSavedStory(e){
     storyContainer.className = "not-hidden"
     deleteBtn.className = "not-hidden"
     deleteBtn.dataset.id = otherID
-    })
+})
 }
 
 
 function loginPrompt(e){
     e.preventDefault()
-
+    
     const name = e.target[0].value 
     const age = parseInt(e.target[1].value)
     buttonValue = e.submitter.value
     userObj = {name, age}
-
+    
     if (buttonValue === "Signup"){
         createAUser(userObj)
     } else if (buttonValue === "Login"){
@@ -232,6 +233,14 @@ function createAUser(userObj){
     .then(decodeResponse)
 }
 
+function madeWith(){
+    let words = ["love","hate","pineapples","loathing","pizza","desire","verisimilitude","pagentry","tortillas","peanut butter","snow"]
+    let randomWord =  [Math.floor(Math.random() * words.length)];
+    let newWord = (randomWord, words[randomWord])
+    footer.innerHTML = 
+    `made with ${newWord} by <a  target="_blank" href="https://github.com/BoltVanderhuge">BoltVanderhuge</a> & <a  target="_blank" href="https://github.com/melissen-up">melissen-up</a>`
+}
+
 function decodeResponse(res){
     if (!!res.message){
         alert(`${res.message}`);
@@ -244,6 +253,7 @@ function decodeResponse(res){
         modal.style = "display: none"
         gridLayout.style = "display: grid"
         loginForm.reset()
+        madeWith()
     } else if (!!res.id){
         changeFormIDs(res.id)
         fetchOtherTextEntries().then(showOtherUserStories)
@@ -253,6 +263,7 @@ function decodeResponse(res){
         modal.style = "display: none"
         gridLayout.style = "display: grid"
         loginForm.reset()
+        madeWith()
     } else 
         alert("Username or age is incorrect")
     
@@ -337,6 +348,7 @@ function renderAMadlib(madLib){
 
 function updateStory(e){
     e.preventDefault()
+    console.log(e)
     let inputs = document.querySelectorAll('#input')
     let num = 1
     inputs.forEach(node => {
@@ -443,8 +455,6 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
-
-
 
 
 
